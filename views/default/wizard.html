@@ -27,7 +27,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 });
 </script>
 
-<h1>{{=T('2. Image configuration')}}</h1>
+<h2>{{=T('2. Image configuration')}}</h2>
 
 <form action="" name="MAINFORM" enctype="multipart/form-data" method="POST">
   <div id="accordion">
@@ -44,6 +44,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
         field_profile.Label = T('Profile')
         field_profile.Valuelist = session.profiles
         field_profile.Valueselected = session.profile
+        field_profile.style = 'display: none;'
         field_profile.Helptext = T('This sets a profile for your router model. If your device is not listed try something generic (default) if available.')
         field_profile.Special = 'onchange="var e = document.getElementById(\'imageconf_profile\'); var selected = e.options[e.selectedIndex].value; ProfilePkgs(\'' + URL('static', 'ajax/' + session.target) + '\', selected);"'
         field_profile = field_profile.select()
@@ -80,6 +81,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
         field_webif.Valueselected = form.vars.webif
         field_webif.Helptext = T('Webinterface that is installed. This may remove or add packages depending on your selection.')
         field_webif.Special = 'onchange="themeselect()"'
+        field_webif.style = 'display: none;'
         field_webif = field_webif.select()
         }}
         {{=field_webif}}
@@ -334,7 +336,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 			var v_wifi1_dhcprange = "{{=form.vars.wifi1dhcprange or ''}}";
 			var v_wifi2_dhcprange = "{{=form.vars.wifi2dhcprange or ''}}";
 
-			var v_wifi0_vap = "{{=form.vars.wifi0vap or session.wifi0vap or ''}}";
+			var v_wifi0_vap = "{{=form.vars.wifi0vap or session.wifi0vap or True}}";
 			var v_wifi1_vap = "{{=form.vars.wifi1vap or session.wifi1vap or ''}}";
 			var v_wifi2_vap = "{{=form.vars.wifi2vap or session.wifi2vap or ''}}";
 
@@ -343,7 +345,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 			var v_wifi2_ipv6ra = "{{=form.vars.wifi2ipv6ra or session.wifi2ipv6ra or ''}}";
 
 			var newdiv = document.createElement('div');
-			wrapper_start = "<div id='wifi" + wifi_counter + "'>";
+			wrapper_start = "<div id='wifi" + wifi_counter + "' class=\"dynamicWifi2\">";
 			wrapper_start += "<fieldset class='section' xmlns='http://www.w3.org/1999/xhtml'>";
 			wrapper_start += "<legend>Wifi" + wifi_counter;
 			wrapper_start += "<span class='sectionremove'>";
@@ -352,10 +354,10 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 			wrapper_start += "<img src=\"{{=URL('static', 'images/icons/remove.gif')}}\" alt=\"{{=T('Remove')}}\">";
 			wrapper_start += "</a></span></legend>";
 
-			wifi_ipv4addr_label = "<label id='imageconf_wifi" + wifi_counter + "ipv4addr__label' ";
+			wifi_ipv4addr_label = "<div class=\"ui-accordion-content2\"><label id='imageconf_wifi" + wifi_counter + "ipv4addr__label' ";
 			wifi_ipv4addr_label += "for='imageconf_wifi" + wifi_counter + "ipv4addr' class='form_label'>";
 			wifi_ipv4addr_label += "{{=T('IPv4 address')}}</label>";
-			wifi_ipv4addr_input = "<div class='form_value'>";
+			wifi_ipv4addr_input = "<span class='form_value'>";
 			wifi_ipv4addr_input += "<input type='text' id='imageconf_wifi" + wifi_counter + "ipv4addr' ";
 			wifi_ipv4addr_input += "value='" + eval('v_wifi' + wifi_counter + '_ipv4addr') + "' name='wifi" + wifi_counter + "ipv4addr'/>";
 			wifi_ipv4addr_input += '{{=formhelpers.helptext(T("IPv4 address for this interface."),config.expandablehelp)}}';
@@ -366,15 +368,15 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 				wifi_ipv4addr_input += "<div id='wifi" + wifi_counter + "ipv4addr__error' class='error'>" + e + "</div>";
 			  }
 			}
-			wifi_ipv4addr_input += "</div>"
+              wifi_ipv4addr_input += "</span></div>"
 			wifi_ipv4addr = wifi_ipv4addr_label + wifi_ipv4addr_input;
 
 			wifi_ipv6addr = '';
 			{{ if session.ipv6_config == 'static':}}
-			wifi_ipv6addr_label = "<label id='imageconf_wifi" + wifi_counter + "ipv6addr__label' ";
+			wifi_ipv6addr_label = "<div class=\"ui-accordion-content2\"><label id='imageconf_wifi" + wifi_counter + "ipv6addr__label' ";
 			wifi_ipv6addr_label += "for='imageconf_wifi" + wifi_counter + "ipv6addr' class='form_label'>";
 			wifi_ipv6addr_label += "{{=T('IPv6 address')}}</label>";
-			wifi_ipv6addr_input = "<div class='form_value'>";
+			wifi_ipv6addr_input = "<span class='form_value'>";
 			wifi_ipv6addr_input += "<input type='text' id='imageconf_wifi" + wifi_counter + "ipv6addr' ";
 			wifi_ipv6addr_input += "value='" + eval('v_wifi' + wifi_counter + '_ipv6addr') + "' name='wifi" + wifi_counter + "ipv6addr'/>";
 			for (var i=0; i<wifi_limit; i++) {
@@ -383,14 +385,14 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 				wifi_ipv6addr_input += "<div id='wifi" + wifi_counter + "ipv6addr__error' class='error'>" + e + "</div>";
 			  }
 			}
-			wifi_ipv6addr_input += "</div>"
+              wifi_ipv6addr_input += "</span></div>"
 			wifi_ipv6addr = wifi_ipv6addr_label + wifi_ipv6addr_input;
 			{{pass}}
 
-			wifi_chan_label = "<label id='imageconf_wifi" + wifi_counter + "chan__label' ";
+			wifi_chan_label = "<div class=\"ui-accordion-content2\"><label id='imageconf_wifi" + wifi_counter + "chan__label' ";
 			wifi_chan_label += "for='imageconf_wifi" + wifi_counter + "chan' class='form_label'>";
 			wifi_chan_label += "{{=T('Channel')}}</label>";
-			wifi_chan_input = "<div class='form_value'>";
+			wifi_chan_input = "<span class='form_value'>";
 			wifi_chan_input += "<input type='text' id='imageconf_wifi" + wifi_counter + "chan' ";
 			wifi_chan_input += "value='" + eval('v_wifi' + wifi_counter + '_chan') + "' name='wifi" + wifi_counter + "chan'/>";
 			for (var i=0; i<wifi_limit; i++) {
@@ -399,28 +401,28 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 				wifi_chan_input += "<div id='wifi" + wifi_counter + "chan__error' class='error'>" + e + "</div>";
 			  }
 			}
-			wifi_chan_input += "</div>";
+              wifi_chan_input += "</span></div>";
 			wifi_chan = wifi_chan_label + wifi_chan_input;
 
-			wifi_dhcp_label = "<label id='imageconf_wifi" + wifi_counter + "dhcp__label' ";
+			wifi_dhcp_label = "<div class=\"ui-accordion-content2\"><label id='imageconf_wifi" + wifi_counter + "dhcp__label' ";
 			wifi_dhcp_label += "for='imageconf_wifi" + wifi_counter + "dhcp' class='form_label'>";
 			wifi_dhcp_label += "{{=T('Enable DHCP')}}</label>";
-			wifi_dhcp_input = "<div class='form_value'>";
+			wifi_dhcp_input = "<span class='form_value'>";
 			wifi_dhcp_input += "<input type='checkbox' checked='' ";
 			wifi_dhcp_input += "name='wifi" + wifi_counter + "dhcp' id='imageconf_wifi" + wifi_counter +"dhcp'/>";
 			wifi_dhcp_input += "<a onclick=\"ToggleDiv('wifi" + wifi_counter + "dhcp_range')\" ";
 			wifi_dhcp_input += "title='Advanced Options' class='advanced' href='javascript:void(0)'>+/-</a>"
 			wifi_dhcp_input += '{{=formhelpers.helptext(T("Enable DHCP and allow guests to connect to the network without using olsrd."),config.expandablehelp)}}';
-			wifi_dhcp_input += "</div>"
+              wifi_dhcp_input += "</span></div>"
 			wifi_dhcp = '<div class="expert">' + wifi_dhcp_label + wifi_dhcp_input + '</div>'; 
 
 
 
 			wifi_dhcp_range_wrap_start = "<div style='display: none;' class='suboptions' id='wifi" + wifi_counter + "dhcp_range'>";
-			wifi_dhcp_range_label = "<label id='imageconf_wifi" + wifi_counter + "dhcprange__label' ";
+			wifi_dhcp_range_label = "<div class=\"ui-accordion-content2\"><label id='imageconf_wifi" + wifi_counter + "dhcprange__label' ";
 			wifi_dhcp_range_label += "for='imageconf_wifi" + wifi_counter + "dhcprange' class='form_label'>";
 			wifi_dhcp_range_label += "{{=T('DHCP Range')}}</label>";
-			wifi_dhcp_range_input = "<div class='form_value'>";
+			wifi_dhcp_range_input = "<span class='form_value'>";
 			wifi_dhcp_range_input += "<input type='text' id='imageconf_wifi" + wifi_counter + "dhcprange' ";
 			wifi_dhcp_range_input += "value='" + eval('v_wifi' + wifi_counter + '_dhcprange') + "' name='wifi" + wifi_counter + "dhcprange'/>";
 			for (var i=0; i<wifi_limit; i++) {
@@ -430,7 +432,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 			  }
 			}
 			wifi_dhcp_range_input += '{{=formhelpers.helptext(T("The range from which clients are assigned IP adresses. If it is inside your mesh network, then clients are announced as HNA by olsrd. If it is outside, they are natted. If left blank then a range is autocalculated from 6.0.0.0/8."),config.expandablehelp)}}';
-			wifi_dhcp_range_input += "</div>";
+              wifi_dhcp_range_input += "</span></div>";
 			wifi_dhcp_range_wrap_end = "</div>";
 			wifi_dhcp_range = wifi_dhcp_range_wrap_start + wifi_dhcp_range_label + wifi_dhcp_range_input + wifi_dhcp_range_wrap_end;
 
@@ -443,23 +445,23 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 			  }
 			}
 
-			wifi_vap_label = "<label id='imageconf_wifi" + wifi_counter + "vap__label' ";
+			wifi_vap_label = "<div class=\"ui-accordion-content2\"><label id='imageconf_wifi" + wifi_counter + "vap__label' ";
 			wifi_vap_label += "for='imageconf_wifi" + wifi_counter + "vap' class='form_label'>";
 			wifi_vap_label += "{{=T('VAP')}}</label>";
-			wifi_vap_input = "<div class='form_value'>";
+			wifi_vap_input = "<span class='form_value'>";
 			wifi_vap_input += "<input type='checkbox'" + checked;
 			wifi_vap_input += "name='wifi" + wifi_counter + "vap' id='imageconf_wifi" + wifi_counter +"vap'/>";
 			wifi_vap_input += "<a onclick=\"ToggleDiv('wifi" + wifi_counter + "_ra')\" ";
 			wifi_vap_input += "title='Advanced Options' class='advanced' href='javascript:void(0)'>+/-</a>"
 
 			wifi_vap_input += '{{=formhelpers.helptext(T("Configure a VAP as Access Point. Only with drivers that support this. At the moment these are madwifi, ath5k and ath9k."),config.expandablehelp)}}';
-			wifi_vap_input += "</div>"
+              wifi_vap_input += "</span></div>"
 			wifi_vap = '<div class="expert">' + wifi_vap_label + wifi_vap_input + '</div>';
 
 			wifi_ipv6ra = '';
 			{{ if session.ipv6_config == 'auto-ipv6-random' or session.ipv6_config == 'auto-ipv6-fromv4' or session.ipv6_config == 'static':}}
 			wifi_ipv6ra_label_start = "<div style='display: none;' class='suboptions' id='wifi" + wifi_counter + "_ra'>";
-			wifi_ipv6ra_label = "<label id='imageconf_wifi" + wifi_counter + "ipv6ra__label' ";
+            wifi_ipv6ra_label = "<label id='imageconf_wifi" + wifi_counter + "ipv6ra__label' ";
 			wifi_ipv6ra_label += "for='imageconf_wifi" + wifi_counter + "ipv6ra' class='expert form_label'>";
 			wifi_ipv6ra_label += "{{=T('Router Advertisement')}}</label>";
 			wifi_ipv6ra_input = "<div class='form_value expert'>";
@@ -677,7 +679,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
       field_wan_allow_ssh.Name = 'wan_allow_ssh'
       field_wan_allow_ssh.Label = T('Allow ssh')
       field_wan_allow_ssh.Helptext = T('Add firewall rule to allow ssh access from the wan interface.')
-      field_wan_allow_ssh.Value = form.vars.wan_allow_ssh or False
+      field_wan_allow_ssh.Value = form.vars.wan_allow_ssh or True
       field_wan_allow_ssh.Errormsg = form.errors.wan_allow_ssh
       field_wan_allow_ssh = field_wan_allow_ssh.chkbox()
 
@@ -685,7 +687,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
       field_wan_allow_web.Name = 'wan_allow_web'
       field_wan_allow_web.Label = T('Allow web')
       field_wan_allow_web.Helptext = T('Add firewall rule to allow web access from the wan interface.')
-      field_wan_allow_web.Value = form.vars.wan_allow_web or False
+      field_wan_allow_web.Value = form.vars.wan_allow_web or True
       field_wan_allow_web.Errormsg = form.errors.wan_allow_web
       field_wan_allow_web = field_wan_allow_web.chkbox()
     }}
@@ -832,27 +834,15 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
   </div>
   <!-- End packages tab -->
 
-  <!-- Start upload tab -->
-  <h3 id="tab-upload" title="{{=T('>Upload')}}" class="tab">{{=T('Upload')}}</h3>
-  <div>
-    <div class="tab-description">
-        {{=T('Upload a tar.gz file which will be extracted and included in the image. The files in this archive are placed in the root of your image in the same way they are arranged in the archive.')}}
-    </div>
-
-    <input type="file" id="upload" class="upload" name="upload"/>
-    {{ if form.errors.upload:}}
-      <div id="upload__error" class="error">{{=T('Only tar.gz archives can be uploaded.')}}</div>
-    {{pass}}
-  </div>
-  <!-- End upload tab -->
-
   <!-- Start submit tab -->
   <h3 title="{{=T('Submit')}}">{{=T('Submit')}}</h3>
   <div>
     <div class="tab-description">
         {{=T('Submit the form and build your images. Note: root password will be "admin".')}}
     </div>
-    <input type="submit" value="Submit" class="button" />
+      <div class="tab-description">
+    <input type="submit" value="Erstellen" class="button" />
+      </div>
   </div>
   <!-- End submit tab -->
 

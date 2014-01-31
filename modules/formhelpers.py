@@ -56,7 +56,7 @@ class formfield:
     """
 
 
-    def __init__(self, name=None, label=None, options=None, helptext=None, special='', value='', valuelist={}, valueselected=None, errormsg=None, advanced=None):
+    def __init__(self, name=None, label=None, options=None, helptext=None, special='', value='', valuelist={}, valueselected=None, errormsg=None, advanced=None, style=''):
         self.Name = name
         self.Label = label
         self.Options = options
@@ -67,12 +67,13 @@ class formfield:
         self.Valueselected = valueselected
         self.Errormsg = errormsg
         self.Advanced = advanced
+        self.style = style
 
     def chkbox(self):
         if not (self.Name and self.Label):
             return gluon.html.XML('<div class="error">Missing variables, at least specify name and label for a checkbox!</div>')
-        label = '<label class="form_label" for="imageconf_' + self.Name + '" id="imageconf_' + self.Name + '__label">' + self.Label + '</label>'
-        field =  '<div class="form_value">'
+        label = '<span class="form_label" for="imageconf_' + self.Name + '" id="imageconf_' + self.Name + '__label">' + self.Label + '</span>'
+        field =  '<span class="form_value">'
         checked = ''
         if self.Value:
             checked = 'checked="1"'
@@ -81,29 +82,29 @@ class formfield:
             field += self.Advanced;
         if self.Helptext:
             field += helptext(self.Helptext)
-        field += '</div>'
+        field += '</span>'
         if self.Errormsg:
             field += errormsg(self.Name, "form.errors." + self.Name, self.Errormsg)
-        return gluon.html.XML(label + field)
+        return gluon.html.XML('<div class="ui-accordion-content2" style="'+self.style+'">'+label + field+ '</div>')
 
     def input(self):
         if not (self.Name and self.Label):
             return gluon.html.XML('<div class="error">Missing variables, at least specify name and label for a input field!</div>')
-        label = '<label class="form_label" for="imageconf_' + self.Name + '" id="imageconf_' + self.Name + '__label">' + self.Label + '</label>'
-        field =  '<div class="form_value">'
-        field += '<input id="imageconf_' + self.Name + '" ' + self.Special + '" value="' + str(self.Value) + '" name="' + self.Name + '" type="text">'
+        label = '<span class="form_label" for="imageconf_' + self.Name + '" id="imageconf_' + self.Name + '__label">' + self.Label + '</span>'
+        field =  '<span class="form_value">'
+        field += '<input id="imageconf_' + self.Name + '" ' + self.Special + '" value="' + str(self.Value) + '" name="' + self.Name + '" type="text" class="generic-widget">'
         if self.Helptext:
             field += helptext(self.Helptext)
-        field += '</div>'
+        field += '</span>'
         if self.Errormsg:
             field += errormsg(self.Name, "form.errors." + self.Name, self.Errormsg)
-        return gluon.html.XML(label + field)
+        return gluon.html.XML('<div class="ui-accordion-content2" style="'+self.style+'">'+label + field+ '</div>')
 
     def select(self):
         if not (self.Name and self.Label):
             return gluon.html.XML('<div class="error">Missing variables, at least specify name and label for a select field!</div>')
-        label = '<label class="form_label" for="imageconf_' + self.Name + '" id="imageconf_' + self.Name + '__label">' + self.Label + '</label>'
-        field =  '<div class="form_value">'
+        label = '<span class="form_label" for="imageconf_' + self.Name + '" id="imageconf_' + self.Name + '__label">' + self.Label + '</span>'
+        field =  '<span class="form_value">'
         field += '<select ' + self.Special + ' name="' + self.Name + '" id="imageconf_' + self.Name + '" class="generic-widget">'
         for v in self.Valuelist:
             selected = ""
@@ -115,19 +116,19 @@ class formfield:
             field += helptext(self.Helptext)
         if self.Errormsg:
             field += errormsg(self.Name, "form.errors." + self.Name, self.Errormsg)
-        field += '</div>'
-        return gluon.html.XML(label + field)
+        field += '</span>'
+        return gluon.html.XML('<div class="ui-accordion-content2" style="'+self.style+'">'+label + field+ '</div>')
 
     def textarea(self, rows=5):
         if not (self.Name and self.Label):
             return gluon.html.XML('<div class="error">Missing variables, at least specify name and label for a textarea field!</div>')
-        label = '<label class="form_label" for="imageconf_' + self.Name + '" id="imageconf_' + self.Name + '__label">' + self.Label + '</label>'
-        field =  '<div class="form_value">'
-        field += '<textarea ' + self.Special + ' rows="' + str(rows) + '" class="text note" id="imageconf_' + self.Name + '" name="' + self.Name + '" type="text">'
+        label = '<span class="form_label" for="imageconf_' + self.Name + '" id="imageconf_' + self.Name + '__label">' + self.Label + '</span>'
+        field =  '<span class="form_value">'
+        field += '<textarea ' + self.Special + ' rows="' + str(rows) + '" id="imageconf_' + self.Name + '" name="' + self.Name + '" type="text" class="generic-widget">'
         field += self.Value + '</textarea>'
         if self.Helptext:
             field += helptext(self.Helptext)
         if self.Errormsg:
             field += errormsg(self.Name, "form.errors." + self.Name, self.Errormsg)
-        field += '</div>'
-        return gluon.html.XML(label + field)
+        field += '</span>'
+        return gluon.html.XML('<div class="ui-accordion-content2">'+label + field+ '</div>')

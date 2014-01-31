@@ -1,6 +1,6 @@
 {{extend 'layout.html'}}
 
-<h1>{{=T('3. Build the images')}}</h1>
+<h2>{{=T('3. Build the images')}}</h2>
 
 <div id="summary">
 	<h2>{{=T('Summary')}}</h2>
@@ -73,7 +73,7 @@ $.ajax({
             }
           }
         }
-        meta = meta + "<br /><a href='" + baseurl + "'>{{=T('Show the whole directory with all files')}}</a>"
+        
         document.getElementById('imagelist').innerHTML = files + "<br /><strong>{{=T('Metadata:')}}</strong>" + meta + "<br />" ;
     },
     error : function(xhr, textStatus, errorThrown ) {
@@ -116,10 +116,12 @@ function summary(){
         var output = "{{=T('Remember! These were your configuration settings. The entire configuration you can find in the summary.json file.')}}<br/><dl> \
 		<dt>{{=T('Community')}}</dt><dd>" + json.community + "</dd>\
         <dt>{{=T('Hostname')}}</dt><dd>" + json.hostname + "</dd>\
+        <dt>{{=T('IPv4 Address')}}</dt><dd>" + json.wifi0ipv4addr + "</dd>\
+        <dt>{{=T('IPv4 address for the LAN interface')}}</dt><dd>" + json.lanipv4addr + "</dd><br>\
+        <dt>Benutzername</dt><dd>root</dd>\
+        <dt>Standardpasswort</dt><dd>admin</dd>\
         <dt>{{=T('Location')}}</dt><dd>" + json.location + "</dd>";
-        if (json.community == "weimar") {
-            output += "<dt>{{=T('Nodenumber')}}</dt><dd>" + json.nodenumber + "</dd>";
-        }
+        
         output += "<dt>{{=T('Profile')}}</dt><dd>" + json.profile + "</dd>\
         <dt>{{=T('Target')}}</dt><dd>" + json.target + "</dd>\
     	</dl>" 

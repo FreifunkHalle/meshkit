@@ -40,8 +40,7 @@
 
   <!-- include stylesheets -->
   {{
-  response.files.append(URL('static','css/skeleton.css'))
-  response.files.append(URL('static','css/web2py.css'))
+  
   if response.menu:
      response.files.append(URL('static','css/superfish.css'))
      response.files.append(URL('static','js/superfish.js'))
@@ -50,7 +49,8 @@
   response.files.append(URL('static','js/jquery-ui.min.js'))
   response.files.append(URL('static','css/jquery-ui.css'))
   response.files.append(URL('static','css/custom.css'))
-  
+   response.files.append(URL('static','css/design.css'))
+  response.files.append(URL('static','css/dropdown.css'))
   }}
 
   {{include 'web2py_ajax.html'}}
@@ -72,105 +72,124 @@
 
 </head>
 <body>
-  <div class="wrapper"><!-- for sticky footer -->
+  {{response.write(headerstream, escape=False)}}
   
-    <div class="topbar">
-      <div class="container">    
-        <div class="sixteen columns">
-          <div id="navbar">{{='auth' in globals() and auth.navbar(separators=(' ',' | ',''))}}</div>
-          {{is_mobile=request.user_agent().is_mobile}}
-      {{if response.menu:}}
-          <div id="menu">
-             {{=MENU(response.menu, _class='mobile-menu' if is_mobile else 'sf-menu',mobile=is_mobile)}}
-          </div>
-          {{pass}}
-        </div>
-      </div>
-    </div><!-- topbar -->
     
     <div class="flash">{{=response.flash or ''}}</div>
-    
-    <div class="header">
-      <div class="container">         
-        <div class="sixteen columns">
-          <div class="sitetitle">
-            <h1 class="remove-bottom title" style="margin-top: .5em;">
-            {{=response.title or request.application}}
-            </h1>
-            <h5>{{=response.subtitle or ''}}</h5>
-          </div>
-          <div class="sitelogo">
-            <img src="{{=URL('static','images/logo.png')}}" />
-          </div>
-        </div>
-        <div class="sixteen columns">
-          <div class="statusbar clearfix">
-            {{block statusbar}}
-            <div class="breadcrumbs">{{=request.function.replace('_', ' ').title()}}</div>
-            <div id="languageselect" style="float:right">
-                <script>
-                    function set_lang(lang) {
-                        var date = new Date();
-                        cookieDate=date.setTime(date.getTime()+(100*24*60*60*1000));
-                        document.cookie='all_lang='+lang+';expires='+cookieDate+'';
-                        window.location.reload();
-                    };
-                </script>
-                <select name="adminlanguage" onchange="set_lang(jQuery(this).val())" style="width: 100px;">
-                    {{for language in T.get_possible_languages():}}
-                        <option {{=T.accepted_language==language and 'selected' or ''}} value="{{=language}}">{{=T(language)}}</option>
-                    {{pass}}
-                </select>
-            </div>
-            
-            {{end}}
-          </div>
-        </div>
-      </div>
-    </div>
+<br>
+    <div id="content" >
+        <div id="sidebar">
+        <h2>Meshkit</h2>
+        <p>
+                Mit diesem Meshkit kannst du die Firmware für Freifunk Halle erstellen.
+        </p>
+        <h2>Router Empfehlung</h2>
+        <p>
+                Wir empfehlen aktuell folgende Routermodelle für Freifunk Halle.
+        </p>
+        <ul>
+        <li>   
+                TP-Link TL-<b>WDR4300</b>nd
+        </li>
+        <li>   
+                TP-Link TL-<b>WDR3600</b>nd
+        </li>
+        <li>   
+                TP-Link TL-<b>WR1043</b>nd
+        </li>
+        <li>   
+                TP-Link TL-<b>WR842</b>nd
+        </li>
+        </ul>
+        <p>
+                <b>nd</b> bedeutet, das die Antennen am Router angeschraubt sind und somit auch gegen andere Antennen getauscht werden können.
+        </p>
 
-    <div class="main">
-      <div class="container">                 
-        {{if left_sidebar_enabled:}}
-        <div class="four columns left-sidebar">
-          {{block left_sidebar}}
-          <h3>Left Sidebar</h3>
-          <p></p>
-          {{end}}
-        </div>
-        {{pass}}
+        <h2>Vorausetzungen</h2>
+        <ul>
+        <li>   
+                <a target="_blank" href="https://freifunk-halle.net/forum"
+                title="hier kannst du dich anmelden">Forum</a>
+                anmelden
+        </li>
+        <li>   
+                <a target="_blank" href="https://www.freifunk-halle.net/mediawiki/wiki/Adressverwaltung"
+                title="hier kannst du eine IP-Adresse regestrieren.">IP-Adresse</a>
+                regestrieren
+        </li>
+        </ul>
+        <h2>Hilfestellung</h2>
+        <ul>
+        <li>
+                jeder Schritt enthält alle nötigen Erklärungen
+        </li>
+        <li>
+                die meisten Einstellungen sind schon vorausgewählt
+        </li>
+        <li>
+                ein paar Einstellungen musst du selber machen
+        </li>
+        <li>
+                leere Felder solltest du entsprechend ausfüllen
+        </li>
+        <li>
+                für Hilfe klick auf das Fragezeichen neben dem jeweiligen Feld
+        </li>
+        </ul>
+
+        <h2>Beginnen</h2>
+        <ul>
+        <li>   
+                <b>Routermodel </b> anklicken
+        </li>
+        <li>   
+                <b>Emailadresse </b> eintragen
+        </li>
+        <li>   
+                <b>Weiter </b> klicken
+        </li>
+        </ul>
+
+        <h2>Lizenz</h2>
+        <p>
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/de/" target="_blank">
+                    <img src="http://freifunk-kanal13.de/media/cc-by-sa.png" alt="Lizenz: CC-BY-SA">
+                </a>
+        </p>
+
+</div>
         
-        <div class="{{=middle_columns}} columns center">
+      <div class="teaser0" >                 
+            <h2 class="remove-bottom title" style="margin-top: .5em;">
+            {{=response.title or request.application}}
+            </h2>
+            <h5>{{=response.subtitle or ''}}</h5>
+        </div>
+{{is_mobile=request.user_agent().is_mobile}}
+      {{if response.menu:}}
+          <div id="menu" class="teaser" >
+             {{=MENU(response.menu, _class='mobile-menu' if is_mobile else 'sf-menu',mobile=is_mobile)}}
+          <br></div>
+          {{pass}}
+        
+        <div class="teaser" style="clear:left;">
           {{block center}}
           {{include}}
           {{end}}
         </div>
         
-        {{if right_sidebar_enabled:}}
-        <div class="four columns">
-          {{block right_sidebar}}
-          <h3>Right Sidebar</h3>
-          <p></p>
-          {{end}}
-        </div>    
-        {{pass}}
         
-      </div><!-- container -->
-    </div><!-- main -->
-    
-    <div class="push"></div>
-  </div><!-- wrapper -->
-
-  <div class="footer">
-    <div class="container">    
-      <div class="sixteen columns">
+        
+      <div class="teaser">    
         {{block footer}} <!-- this is default footer -->
         Did you forget to include footer.html in your view to replace this footer?
         {{end}} 
       </div>
-    </div><!-- container -->
-  </div><!-- footer -->
-  
+    </div><!-- content -->
+    
+    <div class="push"></div>
+
+  {{response.write(footerstream, escape=False)}}
   <!--[if lt IE 7 ]>
     <script src="{{=URL('static','js/dd_belatedpng.js')}}"></script>
     <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>

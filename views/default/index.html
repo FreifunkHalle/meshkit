@@ -1,6 +1,6 @@
 {{extend 'layout.html'}}
 {{footer_enable=True}}
-<h1>{{=T('1. Basic configuration')}}</h1>
+<h2>{{=T('1. Basic configuration')}}</h2>
 
 <div id="custom_text_start">
 	{{=XML(startpage)}}
@@ -25,7 +25,9 @@ field_target.Label = T('Target')
 field_target.Valuelist = targets
 field_target.Valueselected = request.vars.target
 field_target.Helptext = T('For which hardware platform you want to build an image. If you are unsure which is the right one for your device visit the openwrt wiki and search for your device there.')
+        field_target.style = 'display:none;'
 field_target = field_target.select()
+        
 
 field_noconf = formhelpers.formfield()
 field_noconf.Name = 'noconf'
@@ -38,7 +40,8 @@ field_expert = formhelpers.formfield()
 field_expert.Name = 'expert'
 field_expert.Label = T('Expert')
 field_expert.Helptext = T('Enable this to show much more options for customizing your firmware.')
-field_expert.Value = session.expert
+field_expert.Value = session.expert or True
+field_expert.style = 'display: none;'
 field_expert = field_expert.chkbox()
 
 
@@ -47,6 +50,7 @@ field_mail.Name = 'mail'
 field_mail.Label = T('Email')
 field_mail.Helptext = T('Enter your email address here. After the images have been built you will receive an email with download links for the firmware.')
 field_mail.Value = request.vars.mail or user_email or ''
+field_mail.style = 'display: none;'
 field_mail = field_mail.input()
 }}
 
@@ -57,6 +61,7 @@ field_mail = field_mail.input()
     field_community.Valuelist = communities
     field_community.Valueselected = session.community
     field_community.Helptext = T('Please select your wireless community here. This will select reasonable defaults for step 2 of the image configuration.')
+        field_community.style = 'display:none;'
     field_community = field_community.select()
       
 }}
@@ -70,23 +75,9 @@ field_mail = field_mail.input()
 
 {{=field_target}}
 
-{{=field_expert}}
-
-{{if not config.noconf == True:}}
-    {{=field_noconf}}
-{{pass}}
-        
-{{=field_mail}}
-            
-        <input type="submit" value="SUBMIT"/>
-        <input type="hidden" name="profile" id="imageconf_profile"/>
-        <input type="hidden" name="_formname" value="step1" />
-    </form>
-<div style="height:35px"></div>
-
-<h2>{{=T('Select by model')}}</h2>
-<p>{{=T('You may select some known router models below. The target on this page and the profile on the next page will automatically be set for you then.')}}<br />
-{{=T('If your model is not shown below then continue by setting target and profile (on the next page) manually.')}}</p>
+       <div>
+            <h3>{{=T('Select by model')}}</h3>
+        </div>
 
 <div id="modellist">
 </div>
@@ -110,6 +101,7 @@ function target_rewrite(target) {
 
 function set_target(target) {
     $('select[name="target"]').val(target);
+    document.forms['step1']['inputnext'].disabled = false;
 }
 
 function set_profile(profile) {
@@ -149,6 +141,23 @@ list += "</table";
 document.getElementById('modellist').innerHTML = list
 
 </script>
+        
+{{=field_expert}}
+
+{{if not config.noconf == False:}}
+    {{=field_noconf}}
+{{pass}}
+        
+{{=field_mail}}
+            
+        <div>
+            <input type="submit" value="Weiter" disabled name="inputnext" />
+        </div>
+        <input type="hidden" name="profile" id="imageconf_profile"/>
+        <input type="hidden" name="_formname" value="step1" />
+    </form>
+
+
 
 {{block footer}}
 {{include 'footer.html'}}

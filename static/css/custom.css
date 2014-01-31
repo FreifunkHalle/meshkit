@@ -21,3 +21,107 @@ dl dd {
 #docurl {
     margin-bottom: 25px;
 }
+.helplink, .advanced {
+        font-weight:bold;
+        text-decoration:none;
+        font-size:1.1em;
+        margin-top: 5px;
+}
+
+.helptext {
+        background-color:#ECECEC;
+        display:block;
+        font-size:0.9em;
+        margin:10px 10px 20px 200px;
+        padding:10px;
+        z-index:10;
+        padding: .5em 1em;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+}
+div.flash {
+        display: none;
+        position: fixed;
+        padding: 10px;
+        top: 90px;
+        right: 10%;
+        min-width: 280px;
+        opacity: 0.85;
+        margin: 0px 0px 10px 10px;
+        color: #fff;
+        vertical-align: middle;
+        cursor: pointer;
+        background: #000;
+        border: 2px solid #fff;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        z-index: 2;
+	font-size: 0.8em;
+}
+.ui-accordion-content > .expert > .ui-accordion-content2{
+        font-size: 1.5625em;
+}
+#packagelist {
+	font-size: 1.13em;
+	margin: 0;
+}
+#packagelist table {
+	margin: 0;
+	font-size: 1.25em;
+}
+#default_packages {
+	font-size: 1.6em;
+}
+.ui-accordion-content  .ui-accordion-content2, .ui-accordion-content > .tab-description {
+        border-top: 0;
+        overflow: auto;
+        font-size: 1.25em;
+        margin: 0;
+}
+.ui-accordion-content > #wan_options > .ui-accordion-content2  {
+	font-size: 1.5625em;
+}
+.ui-accordion-content > .tab-description > ul  {
+	font-size: 1em;
+	margin: 0;
+}
+.ui-accordion-content > .tab-description {
+	margin-bottom: 20px;
+}
+.generic-widget {
+	min-width:200px;
+}
+.form_label {
+/*	text-align: right;*/
+	padding-right: 10px;
+	min-width: 150px;
+	max-width: 150px;
+	width: 150px;
+	display:inline-block;
+}
+#imageconf_packages {
+	width:98%
+}
+#dynamicWifi {
+	font-size: 1.5625em;
+	margin: 0;
+}
+.dynamicWifi2 > .section > .expert > .ui-accordion-content2, .dynamicWifi2 > .section > .suboptions > .ui-accordion-content2 {
+	margin: 0;
+	font-size: 1.5625em;
+}
+.expert > .dynamicWifi2 {
+	font-size: 1.25em;
+}
+.expert {
+	display: none;
+}
+.expert > .uni-accordion-content2 {
+	font-size: 1.5625em;
+}
+.teaser > #summary > #config, .teaser > #nextsteps > ol {
+	font-size: 1em;
+}
