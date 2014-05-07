@@ -194,10 +194,10 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 		function toggle_container(cmd) {
 		  if ( cmd == 'show' ) {
 			var osm1 = function() {
-			  loadScript('http://www.openstreetmap.org/openlayers/OpenStreetMap.js', osm2);
+			  loadScript('//www.openstreetmap.org/openlayers/OpenStreetMap.js', osm2);
 			};
-			document.getElementById('map_container').innerHTML="<div id='map'></div><div style='font-size:0.8em'>Map by <a href='http://www.openstreetmap.org' title='www.openstreetmap.org'>openstreetmap.org</a>, License CC-BY-SA</div>";
-			loadScript('http://www.openlayers.org/api/OpenLayers.js', osm1);
+			document.getElementById('map_container').innerHTML="<div id='map'></div><div style='font-size:0.8em'>Map by <a href='//www.openstreetmap.org' title='www.openstreetmap.org'>openstreetmap.org</a>, License CC-BY-SA</div>";
+              loadScript('{{=URL("static", "js/OpenLayers.js")}}', osm1);
 			var osm2 = function() {
 			  loadScript('{{=URL("static", "js/osm.js")}}',do_map);
 			};

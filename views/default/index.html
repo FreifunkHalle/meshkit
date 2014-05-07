@@ -40,8 +40,7 @@ field_expert = formhelpers.formfield()
 field_expert.Name = 'expert'
 field_expert.Label = T('Expert')
 field_expert.Helptext = T('Enable this to show much more options for customizing your firmware.')
-field_expert.Value = session.expert or True
-field_expert.style = 'display: none;'
+field_expert.Value = session.expert or False
 field_expert = field_expert.chkbox()
 
 
@@ -126,7 +125,7 @@ for(var manufacturer in modellist) {
     link += "jQuery(\".flash\").html(" + "\"" + msg + "\"" + ").slideDown()'>" + model + "</a>";
     if( typeof full_target != "undefined") {
       if(i < len) {
-        list += link + " | "
+        list += link + " "
       } else {
         list += link;
       }
