@@ -510,7 +510,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
       
   {{if session.community <> 'weimar' and not session.noconf == True:}}
   <!-- Start Lan tab -->
-  <h3 id="tab-lan" title="{{=T('LAN settings')}}">{{=T('LAN')}}</h3>
+  <h3 id="tab-lan" title="{{=T('LAN settings')}}" class="expert">{{=T('LAN')}}</h3>
   <div>
       <div class="tab-description">
         {{=T('You can change the settings for the LAN interface here.')}}</p>
@@ -611,7 +611,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 
   {{if session.community <> 'weimar' and not session.noconf == True:}}
   <!-- Start Wan tab -->
-  <h3 id="tab-wan" title="{{=T('WAN settings')}}">{{=T('WAN')}}</h3>
+  <h3 id="tab-wan" title="{{=T('WAN settings')}}" class="expert">{{=T('WAN')}}</h3>
   <div>
     <div class="tab-description">
       {{=T('Configure your wan interface here. The OpenWrt Default is to use "dhcp".')}}
@@ -679,7 +679,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
       field_wan_allow_ssh.Name = 'wan_allow_ssh'
       field_wan_allow_ssh.Label = T('Allow ssh')
       field_wan_allow_ssh.Helptext = T('Add firewall rule to allow ssh access from the wan interface.')
-      field_wan_allow_ssh.Value = form.vars.wan_allow_ssh or True
+      field_wan_allow_ssh.Value = form.vars.wan_allow_ssh or False
       field_wan_allow_ssh.Errormsg = form.errors.wan_allow_ssh
       field_wan_allow_ssh = field_wan_allow_ssh.chkbox()
 
@@ -687,7 +687,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
       field_wan_allow_web.Name = 'wan_allow_web'
       field_wan_allow_web.Label = T('Allow web')
       field_wan_allow_web.Helptext = T('Add firewall rule to allow web access from the wan interface.')
-      field_wan_allow_web.Value = form.vars.wan_allow_web or True
+      field_wan_allow_web.Value = form.vars.wan_allow_web or False
       field_wan_allow_web.Errormsg = form.errors.wan_allow_web
       field_wan_allow_web = field_wan_allow_web.chkbox()
     }}
@@ -708,7 +708,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
         wan_allow_ssh = '{{=field_wan_allow_ssh}}';
         wan_allow_web = '{{=field_wan_allow_web}}';
 
-        if ( selected == 'dhcp' ) {
+        if ( selected == 'dhcp' || selected == 'halledhcp') {
           document.getElementById('wan_options').innerHTML = wan_allow_ssh + wan_allow_web + localrestrict + sharenet;
         };
         if ( selected == 'static' ) {
@@ -742,7 +742,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 
 
   <!-- Start packages tab -->
-  <h3 id="tab-packages" title="{{=T('Packages')}}">{{=T('Packages')}}</h3>
+  <h3 id="tab-packages" title="{{=T('Packages')}}" class="expert">{{=T('Packages')}}</h3>
   <div>
     <div class="tab-description">
       {{=T('Add or remove packages which are going to be installed into your firmware image here.')}}

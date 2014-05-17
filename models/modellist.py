@@ -18,12 +18,27 @@ config_modellist = {
     "Netgear": {
         "WNDR3700v1":{"target":"ar71xx", "profile":"WNDR3700"},
         "WNDR3700v2":{"target":"ar71xx", "profile":"WNDR3700"},
-        "WGT634U":{"target":"brcm47xx", "profile":"WGT634U"},
+        "WNDR3800":{"target":"ar71xx", "profile":"WNDR3700"},
+        "WNDAP360":{"target":"ar71xx", "profile":"WNDAP360"},
     },
-    "X86":{
-        "Generic":{"target":"x86-generic", "profile":"Generic"},
-        "Virtualbox":{"target":"x86-generic", "profile":"Generic"},
-        "Vmware":{"target":"x86-generic", "profile":"Generic"},
-        "KVM Guest":{"target":"x86-kvm"},
+    "Allnet":{
+        "ALL0258N":{"target":"ar71xx", "profile":"ALL0258N"},
+        "ALL0315N":{"target":"ar71xx", "profile":"ALL0315N"},
     },
+    "Buffalo":{
+        "\"WZR-HP-AG300H\"":{"target":"ar71xx", "profile":"WZRHPAG300H"},
+        "\"WZR-HP-G300NH\"":{"target":"ar71xx", "profile":"WZRHPG300NH"},
+        "\"WZR-HP-G300NH2\"":{"target":"ar71xx", "profile":"WZRHPG300NH2"},
+        "\"WZR-HP-G301NH\"":{"target":"ar71xx", "profile":"WZRHPG300NH"},
+        "\"WZR-HP-G450H\"":{"target":"ar71xx", "profile":"WZRHPAG300H"},
+    },
+    "\"D-Link\"":{
+        "DIR-505":{"target":"ar71xx", "profile":"DIR505A1"},
+        "DIR-825B1":{"target":"ar71xx", "profile":"DIR825B1"},
+        "DIR-825C1":{"target":"ar71xx", "profile":"DIR825C1"},
+        "DIR-835":{"target":"ar71xx", "profile":"DIR835A1"},
+    },
+    "Linksys":{
+        "WRT160NL":{"target":"ar71xx", "profile":"WRT160NL"},
+    }
 }

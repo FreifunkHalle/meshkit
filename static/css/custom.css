@@ -125,3 +125,6 @@ div.flash {
 .teaser > #summary > #config, .teaser > #nextsteps > ol {
 	font-size: 1em;
 }
+.ui-accordion .ui-accordion-header.expert {
+	display: none;
+}
