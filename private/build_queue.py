@@ -388,7 +388,7 @@ class BuildImages(object):
         config += "\n"
 
         # section netconfig/wan for dhcp/static
-        if (self.Wanproto == 'static' and self.Wanipv4addr is not None) or self.Wanproto == 'dhcp':
+        if (self.Wanproto == 'static' and self.Wanipv4addr is not None) or self.Wanproto == 'dhcp' or self.Wanproto == 'halledhcp':
             config += "config 'netconfig' 'wan'\n"
             config += "\toption 'proto' '" + self.Wanproto + "'\n"
 

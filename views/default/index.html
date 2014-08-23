@@ -14,8 +14,6 @@
 {{pass}}
 
 
-
-
     <form method="post" name="step1" enctype="multipart/form-data" action="">
 
 {{
@@ -81,7 +79,6 @@ field_mail = field_mail.input()
 <div id="modellist">
 </div>
 <script type="text/javascript">
-
 var modellist = {{=XML(modellist)}};
 var target_options = document.getElementById('imageconf_target').options;
 
@@ -97,47 +94,71 @@ function target_rewrite(target) {
     return ret;
 }
 
-
 function set_target(target) {
     $('select[name="target"]').val(target);
-    document.forms['step1']['inputnext'].disabled = false;
 }
 
 function set_profile(profile) {
     $('input[name="profile"]').val(profile);
 }
 
-var list = "<table>";
-
-for(var manufacturer in modellist) {
-  var len = Object.keys(modellist[manufacturer]).length;
-  list += '<tr>';
-  list += '<th>' + manufacturer + '</th>';
-  var i = 1;
-  for(var model in modellist[manufacturer]) {
-    list += '<td>';
-    var target = modellist[manufacturer][model]['target'];
-    var profile = modellist[manufacturer][model]['profile'];
-    var full_target = target_rewrite(target);
-    msg = '{{=T('Selected')}} ' + model + '<ul><li>{{=T('Target')}}: ' + full_target + '</li><li>{{=T('Profile')}}: ' + profile + '</li></ul>';
-    link = "<a href='javascript:void(0)' onclick='set_target(\"" + full_target + "\");";
-    link += "set_profile(\"" + profile + "\");";
-    link += "jQuery(\".flash\").html(" + "\"" + msg + "\"" + ").slideDown()'>" + model + "</a>";
-    if( typeof full_target != "undefined") {
-      if(i < len) {
-        list += link + " "
-      } else {
-        list += link;
-      }
+function change_manufactor() {
+    var modellist = {{=XML(modellist)}};
+    var selectedManufactor = $('#manufactorselect').val();
+    var models = sort(modellist[selectedManufactor]);
+    var modellist = "";
+    for (var model in models) {
+        modellist += '<option ';
+        if (model === "WR842") {
+            modellist += "selected";
+        }
+        modellist += '>' + model + '</option>';
     }
-    i++;
+    document.getElementById('modellistselect').innerHTML = modellist;
+    change_model();
+}
+function sort(obj) {
+  var temp_array = [];
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      temp_array.push(key);
+    }
   }
-  list += '</td></tr>';
-list += "</table";
+  temp_array.sort();
+  var temp_obj = {};
+  for (var i=0; i<temp_array.length; i++) {
+    temp_obj[temp_array[i]] = obj[temp_array[i]];
+  }
+  return temp_obj;
+};
+
+function change_model() {
+    var modellist = {{=XML(modellist)}};
+    var selectedManufactor = $('#manufactorselect').val();
+    var selectedModel = $('#modellistselect').val();
+    var target = modellist[selectedManufactor][selectedModel]['target'];
+    var profile = modellist[selectedManufactor][selectedModel]['profile'];
+    var full_target = target_rewrite(target);
+    var msg = '{{=T('Selected')}} ' + selectedModel + '<ul><li>{{=T('Target')}}: ' + full_target + '</li><li>{{=T('Profile')}}: ' + profile + '</li></ul>';
+    set_target(full_target );
+    set_profile( profile );
+    $(".flash").html(msg).slideDown().delay(5000).slideUp();
 }
 
+var newlist = '<table><tr><th>Hersteller</th><td><select id="manufactorselect" onchange="change_manufactor();">';
+var sortedModelist = sort(modellist);
+for(var manufacturer in sortedModelist) {
+  newlist += '<option value="' + manufacturer + '" ';
+  if (manufacturer === "TP-Link") {
+    newlist += 'selected';
+  }
+  newlist += '>' + manufacturer + '</option>';
+}
+    newlist += '</select></td></tr>';
+    newlist += '<tr><th>Modell</th><td><select id="modellistselect" onchange="change_model()"></select></td></tr>';
+    newlist += "</table>";
 
-document.getElementById('modellist').innerHTML = list
+document.getElementById('modellist').innerHTML = newlist;
 
 </script>
         
@@ -150,13 +171,15 @@ document.getElementById('modellist').innerHTML = list
 {{=field_mail}}
             
         <div>
-            <input type="submit" value="Weiter" disabled name="inputnext" />
+            <input type="submit" value="Weiter" name="inputnext" />
         </div>
         <input type="hidden" name="profile" id="imageconf_profile"/>
         <input type="hidden" name="_formname" value="step1" />
     </form>
 
-
+<script type="text/javascript">
+    change_manufactor();
+</script>
 
 {{block footer}}
 {{include 'footer.html'}}
