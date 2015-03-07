@@ -569,7 +569,7 @@ class BuildImages(object):
                 option_pkgs = " "
 
             cmd = "cd " + config.buildroots_dir + "/" + self.Target + "; make image " + option_profile + option_pkgs + " BIN_DIR='" + self.BinDir + "' " + option_files
-            ret = subprocess.call([cmd, ""], stdout=out, stderr=subprocess.STDOUT, goo=True)
+            ret = subprocess.call([cmd, ""], stdout=out, stderr=subprocess.STDOUT, shell=True)
             builder.build_links_json()
             if ret != 0:
                 if ret < 0:
