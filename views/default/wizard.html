@@ -24,6 +24,7 @@
 <script>
 $(function() {
 $( "#accordion" ).accordion({ heightStyle: "content" });
+$( "#accordion2" ).accordion({ heightStyle: "content" });
 });
 </script>
 
@@ -32,10 +33,13 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 <form action="" name="MAINFORM" enctype="multipart/form-data" method="POST">
   <div id="accordion">
   <!-- Start system tab -->
-    <h3 title="{{=T('Basic system settings')}}">{{=T('System')}}</h3>
+    <h3 title="{{=T('Basic system settings')}}">{{=T('System and Contact')}}</h3>
     <div>
       <div class="tab-description">
         {{=T('Basic system settings.')}}
+      </div>
+        <div class="tab-description">
+        {{=T('Please enter some personal informations here so others can contact you. Please have at least one valid contact option (email or phone).')}}
       </div>
       {{if session.profiles:}}
         {{
@@ -145,7 +149,49 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
           {{=field_pubkeys}}
         </div>
       {{pass}}
-    </div>
+ 
+      {{if not session.noconf == True and session.communitysupport == True:}}
+
+ 
+
+      
+    {{
+      field_nickname = formhelpers.formfield()
+      field_nickname.Name = 'nickname'
+      field_nickname.Label = T('Nickname')
+      field_nickname.Helptext = T('Enter your nickname here.')
+      field_nickname.Value = form.vars.nickname or session.nickname or ''
+      field_nickname.Errormsg = form.errors.nickname
+      field_nickname = field_nickname.input()
+      field_name = formhelpers.formfield()
+      field_name.Name = 'name'
+      field_name.Label = T('Name')
+      field_name.Helptext = T('Enter your name here.')
+      field_name.Value = form.vars.name or session.name or ''
+      field_name.Errormsg = form.errors.name
+      field_name = field_name.input()
+      field_email = formhelpers.formfield()
+      field_email.Name = 'email'
+      field_email.Label = T('Mail')
+      field_email.Helptext = T('Enter your email address here.')
+      field_email.Value = form.vars.email or session.mail or ''
+      field_email.Errormsg = form.errors.email
+      field_email = field_email.input()
+      field_note = formhelpers.formfield()
+      field_note.Name = 'note'
+      field_note.Label = T('Note')
+      field_note.Helptext = T('You may enter a custom comment here.')
+      field_note.Value = form.vars.note or session.note or ''
+      field_note.Errormsg = form.errors.note
+      field_note = field_note.textarea()
+    }}
+    {{=field_nickname}}
+    {{=field_name}}
+    {{=field_email}}
+    {{=field_note}}
+  </div>
+  <!-- End contact tab -->
+  {{pass}}
 
     <!-- Start location tab -->
     {{if not session.noconf == True and session.communitysupport == True:}}
@@ -222,65 +268,13 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 			  toggle_container('hide');
 			}
 		  }
+
 	</script>
 
 	  <div id='map_container'></div>
     </div>
   {{pass}}
   <!-- End location tab -->
-
-  {{if not session.noconf == True and session.communitysupport == True:}}
-  <!-- Start contact tab -->
-  <h3 title="{{=T('Contact')}}">{{=T('Contact')}}</h3>
-  <div>
-      <div class="tab-description">
-        {{=T('Please enter some personal informations here so others can contact you. Please have at least one valid contact option (email or phone).')}}
-      </div>
-    {{
-      field_nickname = formhelpers.formfield()
-      field_nickname.Name = 'nickname'
-      field_nickname.Label = T('Nickname')
-      field_nickname.Helptext = T('Enter your nickname here.')
-      field_nickname.Value = form.vars.nickname or session.nickname or ''
-      field_nickname.Errormsg = form.errors.nickname
-      field_nickname = field_nickname.input()
-      field_name = formhelpers.formfield()
-      field_name.Name = 'name'
-      field_name.Label = T('Name')
-      field_name.Helptext = T('Enter your name here.')
-      field_name.Value = form.vars.name or session.name or ''
-      field_name.Errormsg = form.errors.name
-      field_name = field_name.input()
-      field_email = formhelpers.formfield()
-      field_email.Name = 'email'
-      field_email.Label = T('Mail')
-      field_email.Helptext = T('Enter your email address here.')
-      field_email.Value = form.vars.email or session.mail or ''
-      field_email.Errormsg = form.errors.email
-      field_email = field_email.input()
-      field_phone = formhelpers.formfield()
-      field_phone.Name = 'phone'
-      field_phone.Label = T('Phone')
-      field_phone.Helptext = T('Enter your phone number here.')
-      field_phone.Value = form.vars.phone or session.phone or ''
-      field_phone.Errormsg = form.errors.phone
-      field_phone = field_phone.input()
-      field_note = formhelpers.formfield()
-      field_note.Name = 'note'
-      field_note.Label = T('Note')
-      field_note.Helptext = T('You may enter a custom comment here.')
-      field_note.Value = form.vars.note or session.note or ''
-      field_note.Errormsg = form.errors.note
-      field_note = field_note.textarea()
-    }}
-    {{=field_nickname}}
-    {{=field_name}}
-    {{=field_email}}
-    {{=field_phone}}
-    {{=field_note}}
-  </div>
-  <!-- End contact tab -->
-  {{pass}}
 
   {{if session.community <> 'weimar' and not session.noconf == True:}}
   <!-- Start wifi tab -->
@@ -308,6 +302,13 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 			alert("{{=T('Maximum number of wifi interfaces reached.')}}");
 		  }
 		  else {
+            if (wifi_counter == 1) {
+              var cssStyle = document.createElement('style');
+              cssStyle.type = 'text/css';
+              var rules = document.createTextNode(".expert_wifi{display:inline !important}");
+              cssStyle.appendChild(rules);
+              document.getElementsByTagName("head")[0].appendChild(cssStyle);
+            }
 			var e_wifi0_ipv4addr = "{{=form.errors.wifi0ipv4addr}}";
 			var e_wifi1_ipv4addr = "{{=form.errors.wifi1ipv4addr}}";
 			var e_wifi2_ipv4addr = "{{=form.errors.wifi2ipv4addr}}";
@@ -388,7 +389,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
               wifi_ipv6addr_input += "</span></div>"
 			wifi_ipv6addr = wifi_ipv6addr_label + wifi_ipv6addr_input;
 			{{pass}}
-
+            
 			wifi_chan_label = "<div class=\"ui-accordion-content2\"><label id='imageconf_wifi" + wifi_counter + "chan__label' ";
 			wifi_chan_label += "for='imageconf_wifi" + wifi_counter + "chan' class='form_label'>";
 			wifi_chan_label += "{{=T('Channel')}}</label>";
@@ -402,8 +403,8 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 			  }
 			}
               wifi_chan_input += "</span></div>";
-			wifi_chan = wifi_chan_label + wifi_chan_input;
-
+			wifi_chan = '<div class="expert_wifi">' + wifi_chan_label + wifi_chan_input + '</div>';
+        
 			wifi_dhcp_label = "<div class=\"ui-accordion-content2\"><label id='imageconf_wifi" + wifi_counter + "dhcp__label' ";
 			wifi_dhcp_label += "for='imageconf_wifi" + wifi_counter + "dhcp' class='form_label'>";
 			wifi_dhcp_label += "{{=T('Enable DHCP')}}</label>";
@@ -451,9 +452,11 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 			wifi_vap_input = "<span class='form_value'>";
 			wifi_vap_input += "<input type='checkbox'" + checked;
 			wifi_vap_input += "name='wifi" + wifi_counter + "vap' id='imageconf_wifi" + wifi_counter +"vap'/>";
+            {{ if session.ipv6_config == 'auto-ipv6-random' or session.ipv6_config == 'auto-ipv6-fromv4' or session.ipv6_config == 'static':}}
 			wifi_vap_input += "<a onclick=\"ToggleDiv('wifi" + wifi_counter + "_ra')\" ";
-			wifi_vap_input += "title='Advanced Options' class='advanced' href='javascript:void(0)'>+/-</a>"
-
+			
+            wifi_vap_input += "title='Advanced Options' class='advanced' href='javascript:void(0)'>+/-</a>"
+            {{pass}}
 			wifi_vap_input += '{{=formhelpers.helptext(T("Configure a VAP as Access Point. Only with drivers that support this. At the moment these are madwifi, ath5k and ath9k."),config.expandablehelp)}}';
               wifi_vap_input += "</span></div>"
 			wifi_vap = '<div class="expert">' + wifi_vap_label + wifi_vap_input + '</div>';
@@ -833,19 +836,20 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
     </script>        
   </div>
   <!-- End packages tab -->
-
+ </div>
+<div id="accordion2">
   <!-- Start submit tab -->
   <h3 title="{{=T('Submit')}}">{{=T('Submit')}}</h3>
   <div>
     <div class="tab-description">
         {{=T('Submit the form and build your images. Note: root password will be "admin".')}}
-    </div>
+      </div>
       <div class="tab-description">
     <input type="submit" value="Erstellen" class="button" />
       </div>
   </div>
   <!-- End submit tab -->
-
+ </div>
   <!-- Hidden fields -->
   <input type="hidden" name="target" value="{{=session.target}}" />
   <input type="hidden" name="url" value="{{=session.url}}" />
@@ -864,7 +868,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
   <input type="hidden" name="status" value="1" />
   <input type="hidden" name="rand" value="{{=rand}}" />
   <input type="hidden" name="_formname" value="step2" />
-  </div>
+ 
 </form>
 
 <script type="text/javascript">
@@ -908,22 +912,6 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
   update_defaultpkgs();
 </script>
 
-{{if session.community == 'weimar':}}
-  <!-- REGISTRATOR client -->
-  <script src="http://reg.weimarnetz.de/static/jquery-client.js"></script>
-  <script>
-  // define function to handle api answer as a callback
-  function _ffreg_check_callback(answer) {
-
-    // update the status HTML with the result
-    jQuery('#imageconf_nodenumber_status').text(answer.result);
-        
-    var status_color = "lightgrey";
-    status_color = answer.free ? 'lightgreen' : 'lightsalmon';
-    $('#imageconf_nodenumber').css('background', status_color);
-  }
-  </script>
-{{pass}}
 
 {{block footer}}
 {{include 'footer.html'}}

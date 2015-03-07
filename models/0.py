@@ -24,5 +24,5 @@ settings.plugins = []
 response.title = settings.title
 response.subtitle = settings.subtitle
 import os
-headerstream = os.popen("php /var/www/vhosts/ff-backup/htdocs/header.php").read()
-footerstream = os.popen("php /var/www/vhosts/ff-backup/htdocs/footer.html").read()
+headerstream = os.popen("php /var/www/vhosts/freifunk-halle/website/htdocs/header.php").read()
+footerstream = os.popen("php /var/www/vhosts/freifunk-halle/website/htdocs/footer.html").read()

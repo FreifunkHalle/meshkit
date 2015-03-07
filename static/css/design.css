@@ -1,1 +1,265 @@
-../../../../../htdocs/css/design.css
+body {
+  margin: 0 10% ;
+  background: #f9f9f9 url("/media/bg.gif") ;
+  font-size: 99% ;
+  font-family: verdana, arial, sans-serif ;
+} 
+
+a {
+  color: #dc0067 ;
+  font-weight: bold ;
+}
+
+#header {
+  width: 100% ;
+  height: 5em ;
+  padding-bottom: 1em ;
+  background: #fff ;
+  padding-top: 1em ;
+  float: left ;
+  border-left: 1px solid #ccc ;
+  border-right: 1px solid #333 ;
+}
+
+#header h1 {
+  padding: 0 ;
+  margin: 0 ;
+  width: 220px ;
+  padding-left: 10px ;
+  background-color: #333 ;
+  color: #fff ;
+  font-size: 1.2em ;
+  font-weight: bold;
+  display: block ;
+  float: right ;
+}
+
+#header > ul {
+  padding: 0 ;
+  margin: 0 ;
+  list-style-type: none ;
+  display:flex;
+}
+
+#header > #menu > #header-float-right-fill {
+  line-height: normal;
+}
+
+#header > ul > li {
+  float: left ;
+  border-color: #fff;
+  border-radius: 6px ;
+  border-style: solid;
+  border-width: 0px;
+  display:block;
+  margin-left:2px;
+}
+
+#header >ul > li > a {
+  color: #fff ;
+  font-size: 0.8em ;	
+  text-decoration: none ;
+  display: block ;
+  padding: 3em 1em 1em 1em ;
+  font-weight: bold ;
+  border-color: #fff;
+  border-radius: 6px ;
+  border-width: 1px;
+  background: #ffcb05 url("/media/menu2.gif") repeat-x ;
+}
+
+#header > ul > li > a:hover {
+  background: #dc0067 ;
+  border-color: #fff;
+  border-radius: 6px ;
+  border-width: 1px;
+  z-index:99;
+}
+
+#header-float-right-fill {
+  flex:auto; 
+  height:4.1em;
+  background: #ffcb05 url("/media/menu2.gif") repeat-x ;
+  z-index: 10;
+}
+
+#content {
+  width: 100% ;
+  background-color: #fff;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #333;
+  clear: both;
+  float: left;
+}
+
+#sidebar {
+  width: 230px ;
+  float: right ;
+}
+
+#sidebar h2 {
+  background-color: #333 ;
+  padding-left: 10px ;
+  color: #fff ;
+  font-size: 1em ;
+}
+
+#sidebar p {
+  margin-right: 10px ;
+  font-size: 0.8em ;
+  color: #666 ;
+}
+
+#sidebar ul {
+  margin-right: 10px ;
+  font-size: 0.8em ;
+  color: #666 ;
+}
+
+
+#sidebar ol {
+  margin-right: 10px ;
+  font-size: 0.8em ;
+  color: #666 ;
+}
+
+#sidebar table {
+  width: 100% ;
+  font-size: 0.8em ;
+  color: #666 ;
+  margin-bottom: 2em ;
+  list-style-type: none ;
+  padding: 3px ;
+}
+#sidebar table tr td{
+  margin:1px;
+}
+#sidebar rowstyle-1{
+  background-color: #F1F6FA;
+}
+
+.teaser0, .teaser {
+  margin-left: 20px ;
+  margin-right: 300px ;
+}
+
+.teaser0 h2 {
+  font-size: 2em ;
+  color: #333 ;
+  border-bottom: 4px solid #ffcb05 ;
+}
+
+.teaser0 p {
+  margin: 20px 20px 20px 10px ;
+  font-size: 1.2em ;
+  color: #999 ;
+  margin-bottom: 2em ;
+}
+
+.teaser h2 {
+  font-size: 1.3em ;
+  color: #333 ;
+  border-bottom: 2px solid #ccc ;
+}
+
+.teaser h3 {
+  font-size: 1.1em ;
+  color: #666 ;
+}
+
+.teaser p, .teaser ul {
+  margin: 20px ;
+  font-size: 0.8em ;
+  color: #666 ;
+  margin-bottom: 2em ;
+  list-style-type: none ;
+  padding: 0 ;
+}
+
+.teaser ol {
+  margin: 20px ;
+  font-size: 0.8em ;
+  color: #666 ;
+  margin-bottom: 2em ;
+  padding: 0 ;
+  padding-left:10px;
+}
+.teaser .quotetitle, .teaser .quotecontent {
+  font-size: 0.7em ;
+  color: #666 ;
+  padding: 0 ;
+  margin: 0 ;
+}
+
+.teaser .quotecontent {
+  margin-bottom:10px;
+}
+
+.teaser div {
+  margin: 20px ;
+  font-size: 0.8em ;
+  color: #666 ;
+  margin-bottom: 2em ;
+  list-style-type: none ;
+  padding: 0 ;
+}
+
+.teaser table {
+  margin: 20px ;
+  width: 100% ;
+  font-size: 0.8em ;
+  color: #666 ;
+  margin-bottom: 2em ;
+  list-style-type: none ;
+  padding: 3px ;
+}
+.teaser table tr td{
+  padding:3px;
+  padding-left:7px;
+  padding-right:7px;
+  text-align:center;
+  margin:1px;
+}
+.teaser table tr:hover {
+  background-color:#B2C8D4;
+}
+.rowstyle-1{
+  background-color: #F1F6FA;
+}
+
+
+.teaser ul ul {
+  margin: 0 0 10px 0 ;
+  padding-left: 10px ;
+  color: #999 ;
+}
+
+.teaser ol ol {
+  font-size: 1em;
+}
+
+#header .firstlink {
+  margin-left: 0px;
+}
+
+#footer {
+  border-left: 1px solid #ccc ;
+  border-right: 1px solid #333333 ;
+  width: 100% ;
+  background: #ffcb05 url("/media/menu2.gif") repeat-x ;
+  color: #fff ;
+  text-align: center ;
+  clear: both ;
+  float: left ;
+}
+
+#footer p {
+  margin: 5px ;
+  font-size: 0.7em ;
+  font-weight: bold ;
+}
+
+#footer a {
+  color: #fff ;
+  text-decoration: none ;
+}

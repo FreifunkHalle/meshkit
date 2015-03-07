@@ -1,1 +1,65 @@
-../../../../../htdocs/css/dropdown.css
+.menulink-dropdown, .dropdown-menulink {
+  background-clip: padding-box;
+  border-color: #dc0067;
+  border-radius: 6px;
+  border-style: solid;
+  border-width: 2px;
+  display: none;
+  float: left;
+  margin: 0px;
+  margin-top:2px;
+  max-width: 220px;
+  min-width: 140px;
+  padding: 0;
+  position: absolute;
+  top: 4em;
+  z-index: 900;
+  margin-left:0px;
+}
+li.menulink, .dropdown {
+  position: relative;
+}
+a.menulink:after, .dropdown-toggle:after {
+  height: 0;
+  opacity: 0.5;
+  text-indent: -99999px;
+  vertical-align: top;
+  width: 0;
+}
+.dropdown:hover ul.dropdown-menulink {
+  display: block;
+}
+.dropdown-menulink li {
+  background: url("/media/menu2.gif") repeat-x scroll 0 0 #FFCB05;
+  min-width: 165px; 
+  list-style-type: none ;
+  list-style-image: none;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-radius: 6px ;
+  border-style: solid;
+  border-width: 0px;
+  line-height: 1em;
+  margin-bottom:0px;
+}
+.dropdown-menulink li a {
+  color: #fff ;
+  font-size: 0.8em ;
+  text-decoration: none ;
+  display: block ;
+  padding: 3em 1em 1em 1em ;
+  font-weight: bold ;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-radius: 6px ;
+  border-style: solid;
+  border-width: 1px;
+
+}
+
+.dropdown-menulink li a:hover {
+  background-color: #dc0067  ;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-radius: 6px ;
+  border-style: solid;
+  border-width: 1px;
+}
+

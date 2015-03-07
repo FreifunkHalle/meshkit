@@ -510,7 +510,23 @@ class BuildImages(object):
 			    source.seek(0)
 			    source.write(data3)
 			    source.close()
-                    
+            
+            # Handle certs
+            p = subprocess.Popen("sudo /etc/openvpn/ffvpn/make-cert-for-website.sh 'ffvpn-"+self.Hostname+"' '"+self.Email+"'", stdout=subprocess.PIPE, shell=True)
+            (name, err) = p.communicate()
+            filename = "/var/www/vhosts/freifunk-halle/website/htdocs/vpn/dl/" + name
+            if p.returncode == 0 and os.access(filename, os.R_OK):
+                logger.info('extracting %s' % filename)
+                pu_ret = processupload.extract(filename, self.FilesDir)
+                if pu_ret:
+                    logger.warning(str(pu_ret))
+                    # delete certificate tar file
+                    try:
+                        os.remove(filename)
+                        logger.debug('Deleted %s' % filename)
+                    except:
+                        logger.warning('Could not delete %s' % filename)
+
             # Handle uploaded archive
             if self.Upload:
                 uploaded_file = os.path.join(request.folder, "uploads", self.Upload)
@@ -553,7 +569,7 @@ class BuildImages(object):
                 option_pkgs = " "
 
             cmd = "cd " + config.buildroots_dir + "/" + self.Target + "; make image " + option_profile + option_pkgs + " BIN_DIR='" + self.BinDir + "' " + option_files
-            ret = subprocess.call([cmd, ""], stdout=out, stderr=subprocess.STDOUT, shell=True)
+            ret = subprocess.call([cmd, ""], stdout=out, stderr=subprocess.STDOUT, goo=True)
             builder.build_links_json()
             if ret != 0:
                 if ret < 0:

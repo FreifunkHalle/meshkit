@@ -1,4 +1,4 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 {
 '"update" is an optional expression like "field1=\'newvalue\'". You cannot update or delete the results of a JOIN': '"update" is an optional expression like "field1=\'newvalue\'". You cannot update or delete the results of a JOIN',
 '%(name)s can only be up to %(len)s characters long': '%(name)s darf höchstens %(len)s Zeichen lang sein',
@@ -88,6 +88,7 @@
 'Enable DHCP-Server for the LAN interface.': 'DHCP-Server für die LAN Schnittstelle aktivieren.',
 'Enable this to show much more options for customizing your firmware.': 'Expertenmodus: Aktiviere diese Option um wesentlich mehr Einstellungsmöglichkeiten zu haben.',
 'Enable/Disable IPv6 globally.': 'IPv6 global (de)aktivieren',
+'Enter an integer between %(min)g and %(max)g': 'Enter an integer between %(min)g and %(max)g',
 'enter an integer between %(min)g and %(max)g': 'Gib eine Ganzzahl zwischen %(min)g und %(max)g an',
 'Enter the coordinates and location for your node here. This is used to show your node on maps of the mesh network.': 'Gib hier den Standort und Koordinaten für deinen Knoten ein. Wähle dazu auf der Karte deinen Standpunkt. Diese Daten werden benutzt, um deinen Knoten auf Karten des Mesh-Netzwerks anzuzeigen.',
 'Enter your email address here.': 'Gib hier deine Emailadresse ein.',
@@ -274,6 +275,7 @@
 'Successful': 'Erfolgreich',
 'Summary': 'Zusammenfassung',
 'System': 'System',
+'System and Contact': 'System und Kontakt',
 'table': 'Tabelle',
 'Target': 'Target',
 'The "query" is a condition like "db.table1.field1==\'value\'". Something like "db.table1.field1==db.table2.field2" results in a SQL JOIN.': 'The "query" is a condition like "db.table1.field1==\'value\'". Something like "db.table1.field1==db.table2.field2" results in a SQL JOIN.',

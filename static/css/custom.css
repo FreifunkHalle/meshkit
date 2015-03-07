@@ -109,14 +109,14 @@ div.flash {
 	font-size: 1.5625em;
 	margin: 0;
 }
-.dynamicWifi2 > .section > .expert > .ui-accordion-content2, .dynamicWifi2 > .section > .suboptions > .ui-accordion-content2 {
+.dynamicWifi2 > .section > .expert > .ui-accordion-content2, .dynamicWifi2 > .section > .expert_wifi > .ui-accordion-content2, .dynamicWifi2 > .section > .suboptions > .ui-accordion-content2 {
 	margin: 0;
 	font-size: 1.5625em;
 }
 .expert > .dynamicWifi2 {
 	font-size: 1.25em;
 }
-.expert {
+.expert, .expert_wifi {
 	display: none;
 }
 .expert > .uni-accordion-content2 {
