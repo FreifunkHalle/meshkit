@@ -25,7 +25,7 @@ field_target.Valueselected = request.vars.target
 field_target.Helptext = T('For which hardware platform you want to build an image. If you are unsure which is the right one for your device visit the openwrt wiki and search for your device there.')
         field_target.style = 'display:none;'
 field_target = field_target.select()
-        
+
 
 field_noconf = formhelpers.formfield()
 field_noconf.Name = 'noconf'
@@ -33,6 +33,7 @@ field_noconf.Label = T('No configuration')
 field_noconf.Value = session.noconf
 field_noconf.Helptext = T('If you check this option meshkit will only build your images, but not configure your system. Also it is still possible to select packages and upload your own files.')
 field_noconf = field_noconf.chkbox()
+
 
 field_expert = formhelpers.formfield()
 field_expert.Name = 'expert'
@@ -52,6 +53,7 @@ field_mail = field_mail.input()
 }}
 
 {{if config.communitysupport == True:
+
     field_community = formhelpers.formfield()
     field_community.Name = 'community'
     field_community.Label = T('Community')
@@ -60,9 +62,9 @@ field_mail = field_mail.input()
     field_community.Helptext = T('Please select your wireless community here. This will select reasonable defaults for step 2 of the image configuration.')
         field_community.style = 'display:none;'
     field_community = field_community.select()
-      
+
 }}
- 
+{{pass}} 
 {{=field_community}}
 {{pass}}
 
@@ -81,6 +83,7 @@ field_mail = field_mail.input()
 <script type="text/javascript">
 var modellist = {{=XML(modellist)}};
 var target_options = document.getElementById('imageconf_target').options;
+var target_hiddenvalue = document.getElementById('imageconf_target').value;
 
 function target_rewrite(target) {
     for(option in target_options) {
@@ -90,6 +93,9 @@ function target_rewrite(target) {
              ret = target_options[option].value;
           }
 	}
+    }
+    if (typeof ret == "undefined") {
+       ret = target_hiddenvalue
     }
     return ret;
 }
@@ -122,6 +128,7 @@ function sort(obj) {
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
       temp_array.push(key);
+
     }
   }
   temp_array.sort();
