@@ -232,7 +232,6 @@ function update_defaultpkgs() {
 	if( typeof nosharepackages != "undefined") { addpackages += " " + nosharepackages };
 	if( typeof extrapackages != "undefined") { addpackages += " " + extrapackages };
 	if( typeof ipv6packages != "undefined") { addpackages += " " + ipv6packages };
-        if( typeof qospackages != "undefined") { addpackages += " " + qospackages };
 
 	packages = packages.split(" ").sort();
 	packages = packages.join(" ");
@@ -249,6 +248,5 @@ function update_defaultpkgs() {
 	}
 
 }
-
 
 /* End package list */
